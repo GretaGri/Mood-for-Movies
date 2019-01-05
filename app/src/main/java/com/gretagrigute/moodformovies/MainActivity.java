@@ -1,36 +1,50 @@
 package com.gretagrigute.moodformovies;
 
-import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.widget.TextView;
 
-import com.gretagrigute.moodformovies.Constants.TMDbApiConstants;
+import com.gretagrigute.moodformovies.Network.NetworkUtils;
+
+import java.io.IOException;
+import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Uri.Builder uriBuilder;
-
-    //please add the API key in the gradle.properties like this:
-    //MoodForMovies_TMDbApiKey="your-key"
-    String apiKey = BuildConfig.ApiKey;
-    String language = "en-US";
-    String sort_by = "popularity.desc";
-    String page = "1";
+    TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Uri baseUri = Uri.parse(TMDbApiConstants.TMDB_API_URL);
+       textView = (TextView) findViewById(R.id.text);
 
-        // buildUpon prepares the baseUri that we just parsed so we can add query parameters to it
-        uriBuilder = baseUri.buildUpon();
+        new DownloadMoviesTask().execute();
+    }
 
-        // Append query parameter and its value. For example, the `sort_by = popularity.desc`
-        uriBuilder.appendQueryParameter(TMDbApiConstants.QUERRY_PARAMETER_LANGUAGE, language);
-        uriBuilder.appendQueryParameter(TMDbApiConstants.QUERRY_PARAMETER_SORT_BY, sort_by);
-        uriBuilder.appendQueryParameter(TMDbApiConstants.QUERRY_PARAMETER_PAGE, page);
-        uriBuilder.appendQueryParameter(TMDbApiConstants.QUERRY_PARAMETER_API_KEY, apiKey);
+    private class DownloadMoviesTask extends AsyncTask<URL, Integer, String> {
+        protected String doInBackground(URL... urls) {
+            URL movieUrl = NetworkUtils.buildUrl();
+            String result = "";
+
+            if (movieUrl!=null){
+                try {
+                    result = NetworkUtils.getResponseFromHttpUrl(movieUrl);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return result;
+        }
+
+        protected void onProgressUpdate(Integer... progress) {
+
+        }
+
+        protected void onPostExecute(String result) {
+        textView.setText(result);
+        }
     }
 }
