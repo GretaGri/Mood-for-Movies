@@ -1,16 +1,24 @@
 package com.gretagrigute.moodformovies.Network;
 
 import android.net.Uri;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.gretagrigute.moodformovies.BuildConfig;
 import com.gretagrigute.moodformovies.Constants.TMDbApiConstants;
+import com.gretagrigute.moodformovies.Model.MovieData;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -19,14 +27,13 @@ import java.util.Scanner;
 public class NetworkUtils {
 
     private static final String TAG = NetworkUtils.class.getSimpleName();
-    private static Uri.Builder uriBuilder;
-
     //please add the API key in the gradle.properties like this:
     //MoodForMovies_TMDbApiKey="your-key"
     private static final String apiKey = BuildConfig.ApiKey;
     private static final String language = "en-US";
     private static final String sort_by = "popularity.desc";
     private static final String page = "1";
+    private static Uri.Builder uriBuilder;
 
     public static URL buildUrl() {
 
@@ -41,7 +48,7 @@ public class NetworkUtils {
         uriBuilder.appendQueryParameter(TMDbApiConstants.QUERRY_PARAMETER_PAGE, page);
         uriBuilder.appendQueryParameter(TMDbApiConstants.QUERRY_PARAMETER_API_KEY, apiKey);
 
-       Uri completeUri = uriBuilder.build();
+        Uri completeUri = uriBuilder.build();
 
         URL url = null;
         try {
@@ -79,5 +86,78 @@ public class NetworkUtils {
         } finally {
             urlConnection.disconnect();
         }
+    }
+
+    /**
+     * Return a list of movies objects that has been built up from
+     * parsing the given JSON response.
+     */
+    public static List<MovieData> extractFeatureFromJson(String moviesJSON) {
+        // If the JSON string is empty or null, then return early.
+        if (TextUtils.isEmpty(moviesJSON)) {
+            return null;
+        }
+
+        // Create an empty ArrayList that we can start adding movies to
+        List<MovieData> movies = new ArrayList<>();
+
+        // Try to parse the JSON response string. If there's a problem with the way the JSON
+        // is formatted, a JSONException exception object will be thrown.
+        // Catch the exception so the app doesn't crash, and print the error message to the logs.
+        try {
+
+            // Create a JSONObject from the JSON response string
+            JSONObject baseJsonResponse = new JSONObject(moviesJSON);
+
+            // Extract the JSONArray associated with the key called "results",
+            // which represents a list of articles.
+            JSONArray results = baseJsonResponse.getJSONArray(TMDbApiConstants.RESULTS_ARRAY);
+
+            // For each article in the articlesArray, create an {@link Article} object
+            for (int i = 0; i < results.length(); i++) {
+
+                // Get a single article at position i within the list of
+                JSONObject currentMovie = results.getJSONObject(i);
+
+                //Retrieve the field that you need from this json object:
+
+                // Extract the value for the key called "release_date"
+                String releaseDate = currentMovie.getString(TMDbApiConstants.RELEASE_DATE);
+
+                // Extract the value for the key called "title"
+                String title = currentMovie.getString(TMDbApiConstants.TITLE);
+
+                // Extract the value for the "vote_average"
+                String voteAverage = currentMovie.getString(TMDbApiConstants.VOTE_AVERAGE);
+
+                //Extract the value for the key "overview"
+                String plotSynopsis = currentMovie.getString(TMDbApiConstants.PLOT_SYNOPSIS);
+
+                // Extract the value for the key called "poster_path"
+                String moviePosterPath = currentMovie.getString(TMDbApiConstants.MOVIE_POSTER);
+
+                String moviePoster = "";
+
+                if (!TextUtils.isEmpty(moviePosterPath)) {
+                    moviePoster = TMDbApiConstants.IMAGE_URL_BASE_w92 + moviePosterPath;
+                    Log.d(TAG, "Movie poster path is" + moviePoster);
+                }
+
+                // Create a new {@link MovieData} object with
+                MovieData movieData = new MovieData(releaseDate, title, voteAverage, plotSynopsis, moviePoster);
+
+                // Add the new {@link movieData} to the list of movies.
+                movies.add(movieData);
+            }
+
+        } catch (JSONException e) {
+            // If an error is thrown when executing any of the above statements in the "try" block,
+            // catch the exception here, so the app doesn't crash. Print a log message
+            // with the message from the exception.
+            Log.e(TAG, "Problem parsing the TMDb JSON results", e);
+        }
+
+        // Return the list of movies
+        return movies;
     }
 }

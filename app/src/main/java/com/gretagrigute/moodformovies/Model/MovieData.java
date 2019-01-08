@@ -38,7 +38,7 @@ public class MovieData {
         return moviePoster;
     }
 
-        @Override
+    @Override
     public String toString() {
         return "Movie{" +
                 "release_date='" + releaseDate + '\'' +
