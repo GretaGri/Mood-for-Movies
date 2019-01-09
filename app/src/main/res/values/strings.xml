@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Mood for Movies</string>
+    <string name="menu_item_most_popular">Most Popular</string>
+    <string name="menu_item_top_rated">Top Rated</string>
 </resources>

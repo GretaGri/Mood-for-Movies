@@ -7,5 +7,7 @@
     <dimen name="text_size_title">26sp</dimen>
     <dimen name="text_size_small">12sp</dimen>
     <dimen name="padding_small">8dp</dimen>
-    <dimen name="margin_start">78dp</dimen>
+    <dimen name="margin_start">88dp</dimen>
+    <dimen name="image_width">80dp</dimen>
+    <dimen name="title_width">200dp</dimen>
 </resources>

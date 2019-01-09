@@ -35,20 +35,46 @@ public class NetworkUtils {
     private static final String page = "1";
     private static Uri.Builder uriBuilder;
 
-    public static URL buildUrl() {
 
-        Uri baseUri = Uri.parse(TMDbApiConstants.TMDB_API_URL);
+    public static URL buildUrl(String choice) {
+        Uri completeUri;
+        switch (choice) {
+            case TMDbApiConstants.POPULAR:
+                Uri baseUriPopular = Uri.parse(TMDbApiConstants.TMDB_API_URL_POPULAR);
 
-        // buildUpon prepares the baseUri that we just parsed so we can add query parameters to it
-        uriBuilder = baseUri.buildUpon();
+                // buildUpon prepares the baseUri that we just parsed so we can add query parameters to it
+                uriBuilder = baseUriPopular.buildUpon();
 
-        // Append query parameter and its value. For example, the `sort_by = popularity.desc`
-        uriBuilder.appendQueryParameter(TMDbApiConstants.QUERRY_PARAMETER_LANGUAGE, language);
-        uriBuilder.appendQueryParameter(TMDbApiConstants.QUERRY_PARAMETER_SORT_BY, sort_by);
-        uriBuilder.appendQueryParameter(TMDbApiConstants.QUERRY_PARAMETER_PAGE, page);
-        uriBuilder.appendQueryParameter(TMDbApiConstants.QUERRY_PARAMETER_API_KEY, apiKey);
+                // Append query parameter and its value. For example, the `sort_by = popularity.desc`
+                uriBuilder.appendQueryParameter(TMDbApiConstants.QUERRY_PARAMETER_API_KEY, apiKey);
 
-        Uri completeUri = uriBuilder.build();
+                completeUri = uriBuilder.build();
+                break;
+            case TMDbApiConstants.TOP_RATED:
+                Uri baseUriTopRated = Uri.parse(TMDbApiConstants.TMDB_API_URL_TOP_RATED);
+
+                // buildUpon prepares the baseUri that we just parsed so we can add query parameters to it
+                uriBuilder = baseUriTopRated.buildUpon();
+
+                // Append query parameter and its value. For example, the `sort_by = popularity.desc`
+                uriBuilder.appendQueryParameter(TMDbApiConstants.QUERRY_PARAMETER_API_KEY, apiKey);
+                completeUri = uriBuilder.build();
+                break;
+            default:
+                Uri baseUri = Uri.parse(TMDbApiConstants.TMDB_API_URL);
+
+                // buildUpon prepares the baseUri that we just parsed so we can add query parameters to it
+                uriBuilder = baseUri.buildUpon();
+
+                // Append query parameter and its value. For example, the `sort_by = popularity.desc`
+                uriBuilder.appendQueryParameter(TMDbApiConstants.QUERRY_PARAMETER_LANGUAGE, language);
+                uriBuilder.appendQueryParameter(TMDbApiConstants.QUERRY_PARAMETER_SORT_BY, sort_by);
+                uriBuilder.appendQueryParameter(TMDbApiConstants.QUERRY_PARAMETER_PAGE, page);
+                uriBuilder.appendQueryParameter(TMDbApiConstants.QUERRY_PARAMETER_API_KEY, apiKey);
+
+                completeUri = uriBuilder.build();
+                break;
+        }
 
         URL url = null;
         try {
@@ -57,7 +83,7 @@ public class NetworkUtils {
             e.printStackTrace();
         }
 
-        Log.v(TAG, "Built URI " + url);
+        Log.d(TAG, "Built URI " + url);
 
         return url;
     }
