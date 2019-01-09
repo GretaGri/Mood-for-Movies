@@ -45,12 +45,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         String moviePoster = movieList.get(i).getMoviePoster();
         Glide.with(context).load(moviePoster).into(recyclerViewAdapterViewHolder.posterImageView);
         recyclerViewAdapterViewHolder.averageVoteTextView.setText(movieList.get(i).getVoteAverage());
+        recyclerViewAdapterViewHolder.titleTextView.setSelected(true);
         recyclerViewAdapterViewHolder.titleTextView.setText(movieList.get(i).getTitle());
         recyclerViewAdapterViewHolder.dateTextView.setText(movieList.get(i).getReleaseDate());
         recyclerViewAdapterViewHolder.plotTextView.setText(movieList.get(i).getPlotSynopsis());
-
-
-
     }
 
     @Override
@@ -70,7 +68,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             super(itemView);
             posterImageView = (ImageView) itemView.findViewById(R.id.iv_image);
             titleTextView = (TextView) itemView.findViewById(R.id.tv_title);
-            titleTextView.setFocusable(true);
             dateTextView = (TextView) itemView.findViewById(R.id.tv_date);
             averageVoteTextView = (TextView) itemView.findViewById(R.id.tv_average_vote);
             plotTextView = (TextView) itemView.findViewById(R.id.tv_plot);
