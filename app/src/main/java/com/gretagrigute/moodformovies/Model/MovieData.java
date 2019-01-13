@@ -1,9 +1,12 @@
 package com.gretagrigute.moodformovies.Model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Greta Grigutė on 2019-01-05.
  */
-public class MovieData {
+public class MovieData implements Parcelable {
     private final String releaseDate;
     private final String title;
     private final String voteAverage;
@@ -17,6 +20,26 @@ public class MovieData {
         this.plotSynopsis = plotSynopsis;
         this.moviePoster = moviePoster;
     }
+
+    protected MovieData(Parcel in) {
+        releaseDate = in.readString();
+        title = in.readString();
+        voteAverage = in.readString();
+        plotSynopsis = in.readString();
+        moviePoster = in.readString();
+    }
+
+    public static final Creator<MovieData> CREATOR = new Creator<MovieData>() {
+        @Override
+        public MovieData createFromParcel(Parcel in) {
+            return new MovieData(in);
+        }
+
+        @Override
+        public MovieData[] newArray(int size) {
+            return new MovieData[size];
+        }
+    };
 
     public String getReleaseDate() {
         return releaseDate;
@@ -47,6 +70,20 @@ public class MovieData {
                 ", overview='" + plotSynopsis + '\'' +
                 ", poster_path='" + moviePoster + '\'' +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(releaseDate);
+        dest.writeString(title);
+        dest.writeString(voteAverage);
+        dest.writeString(plotSynopsis);
+        dest.writeString(moviePoster);
     }
 }
 

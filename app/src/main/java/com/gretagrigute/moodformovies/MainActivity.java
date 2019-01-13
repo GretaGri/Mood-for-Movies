@@ -2,49 +2,47 @@ package com.gretagrigute.moodformovies;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.LinearLayout;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.gretagrigute.moodformovies.Constants.Constants;
 import com.gretagrigute.moodformovies.Constants.TMDbApiConstants;
 import com.gretagrigute.moodformovies.Model.MovieData;
 import com.gretagrigute.moodformovies.Network.NetworkUtils;
-import com.gretagrigute.moodformovies.UI.RecyclerViewAdapter;
+import com.gretagrigute.moodformovies.UI.ListFragment;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    RecyclerView recyclerView;
     String choice;
-
+    TextView noConnection;
+    ProgressBar loadingSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-
-        LinearLayoutManager layoutManager
-                = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-
-        recyclerView.setLayoutManager(layoutManager);
+        noConnection = (TextView) findViewById(R.id.tv_no_connection);
+        loadingSpinner = (ProgressBar) findViewById(R.id.loading_spinner);
 
         choice = "first_page";
-
         new DownloadMoviesTask().execute();
     }
 
-    private class DownloadMoviesTask extends AsyncTask<URL, Integer, String> {
+    public class DownloadMoviesTask extends AsyncTask<URL, Integer, String> {
         protected String doInBackground(URL... urls) {
             URL movieUrl = NetworkUtils.buildUrl(choice);
             String result = "";
@@ -64,10 +62,22 @@ public class MainActivity extends AppCompatActivity {
         }
 
         protected void onPostExecute(String result) {
-            List<MovieData> moviesList = NetworkUtils.extractFeatureFromJson(result);
+            ArrayList<MovieData> moviesList = (ArrayList<MovieData>) NetworkUtils.extractFeatureFromJson(result);
+
             if (moviesList != null) {
-                RecyclerViewAdapter adapter = new RecyclerViewAdapter(moviesList);
-                recyclerView.setAdapter(adapter);
+                noConnection.setVisibility(View.GONE);
+                loadingSpinner.setVisibility(View.VISIBLE);
+                Fragment listFragment = new ListFragment();
+                Bundle bundle = new Bundle();
+                bundle.putParcelableArrayList(Constants.PARCELABLE, moviesList);
+                listFragment.setArguments(bundle);
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.add(R.id.fragment, listFragment);
+                fragmentTransaction.commit();
+            } else {
+                noConnection.setVisibility(View.VISIBLE);
+                loadingSpinner.setVisibility(View.INVISIBLE);
             }
         }
     }

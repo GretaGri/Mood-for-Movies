@@ -10,4 +10,5 @@
     <dimen name="margin_start">88dp</dimen>
     <dimen name="image_width">80dp</dimen>
     <dimen name="title_width">200dp</dimen>
+    <dimen name="image_height">120dp</dimen>
 </resources>
