@@ -1,11 +1,14 @@
 package com.gretagrigute.moodformovies.UI;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +17,6 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.gretagrigute.moodformovies.Constants.Constants;
-import com.gretagrigute.moodformovies.MainActivity;
 import com.gretagrigute.moodformovies.Model.MovieData;
 import com.gretagrigute.moodformovies.R;
 
@@ -65,25 +67,24 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.RecyclerViewAd
         public RecyclerViewAdapterViewHolder(@NonNull View itemView) {
             super(itemView);
             posterImageView = (ImageView) itemView.findViewById(R.id.iv_image);
+            posterImageView.setOnClickListener(this);
             frameLayout = (FrameLayout) itemView.findViewById(R.id.fragment_list);
         }
 
         @Override
         public void onClick(View v) {
-            Integer id = itemView.getId();
-            SharedPreferences prefs = context.getSharedPreferences(Constants.PREF_NAME, MainActivity.MODE_PRIVATE);
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putInt(Constants.MOVIE_ID, id);
-            editor.commit();
+            Integer id = getLayoutPosition();
             ArrayList<MovieData> moviesList = (ArrayList<MovieData>) movieList;
             Fragment detailsFragment = new DetailsFragment();
             Bundle bundle = new Bundle();
             bundle.putParcelableArrayList(Constants.PARCELABLE, moviesList);
+            bundle.putInt(Constants.MOVIE_ID,id);
             detailsFragment.setArguments(bundle);
-//            FragmentManager fragmentManager = context.getSupportFragmentManager();
-//            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//            fragmentTransaction.replace(R.id.fragment, detailsFragment);
-//            fragmentTransaction.commit();
+            Log.d("GridAdapter","id is: "+ id);
+            FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment, detailsFragment);
+            fragmentTransaction.commit();
         }
     }
 }

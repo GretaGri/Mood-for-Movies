@@ -41,12 +41,8 @@ public class DetailsFragment extends Fragment {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
 
-            moviesList = savedInstanceState.getParcelableArrayList(Constants.PARCELABLE);
-
-            SharedPreferences prefs = getActivity().getSharedPreferences(Constants.PREF_NAME, MainActivity.MODE_PRIVATE);
-            if (prefs!=null){
-            id = prefs.getInt(Constants.MOVIE_ID,-1);
-            }
+            moviesList = getArguments().getParcelableArrayList(Constants.PARCELABLE);
+            id = getArguments().getInt(Constants.MOVIE_ID);
         }
 
         @Override
