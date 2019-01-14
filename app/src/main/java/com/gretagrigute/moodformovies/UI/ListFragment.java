@@ -45,9 +45,11 @@ public class ListFragment extends Fragment {
 
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
 
-        int numberOfColumns = 3;
+        int numberOfColumns = 2;
         GridLayoutManager layoutManager = new GridLayoutManager (getActivity(), numberOfColumns);
         recyclerView.setLayoutManager(layoutManager);
+        ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(getActivity(), R.dimen.item_offset);
+        recyclerView.addItemDecoration(itemDecoration);
 
         if (moviesList != null) {
             GridAdapter adapter = new GridAdapter(moviesList);

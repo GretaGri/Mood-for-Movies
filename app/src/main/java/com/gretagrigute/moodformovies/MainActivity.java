@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     String choice;
     TextView noConnection;
     ProgressBar loadingSpinner;
+    FrameLayout fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         noConnection = (TextView) findViewById(R.id.tv_no_connection);
         loadingSpinner = (ProgressBar) findViewById(R.id.loading_spinner);
+        fragment = (FrameLayout)findViewById(R.id.fragment);
 
         choice = "first_page";
         new DownloadMoviesTask().execute();
@@ -75,9 +78,15 @@ public class MainActivity extends AppCompatActivity {
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.add(R.id.fragment, listFragment);
                 fragmentTransaction.commit();
+                loadingSpinner.setVisibility(View.GONE);
+                fragment.setVisibility(View.VISIBLE);
+
             } else {
+                Log.d("MainActivity", "no connection");
                 noConnection.setVisibility(View.VISIBLE);
-                loadingSpinner.setVisibility(View.INVISIBLE);
+                loadingSpinner.setVisibility(View.GONE);
+                fragment.setVisibility(View.GONE);
+
             }
         }
     }

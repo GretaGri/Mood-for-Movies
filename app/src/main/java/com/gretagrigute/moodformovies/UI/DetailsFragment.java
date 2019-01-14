@@ -60,7 +60,7 @@ public class DetailsFragment extends Fragment {
             if (moviesList != null&&id!=-1) {
                 String moviePoster = moviesList.get(id).getMoviePoster();
                 Glide.with(getActivity()).load(moviePoster).into(posterImageView);
-                titleTextView.setText(moviesList.get(id).getVoteAverage());
+                averageVoteTextView.setText(moviesList.get(id).getVoteAverage());
                 titleTextView.setSelected(true);
                 titleTextView.setText(moviesList.get(id).getTitle());
                 dateTextView.setText(moviesList.get(id).getReleaseDate());
