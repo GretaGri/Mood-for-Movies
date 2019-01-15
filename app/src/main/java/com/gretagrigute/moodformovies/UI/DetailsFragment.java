@@ -1,20 +1,15 @@
 package com.gretagrigute.moodformovies.UI;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.gretagrigute.moodformovies.Constants.Constants;
-import com.gretagrigute.moodformovies.MainActivity;
 import com.gretagrigute.moodformovies.Model.MovieData;
 import com.gretagrigute.moodformovies.R;
 
@@ -59,7 +54,11 @@ public class DetailsFragment extends Fragment {
 
             if (moviesList != null&&id!=-1) {
                 String moviePoster = moviesList.get(id).getMoviePoster();
-                Glide.with(getActivity()).load(moviePoster).into(posterImageView);
+                GlideApp.with(getActivity())
+                        .load(moviePoster)
+                        .placeholder(R.drawable.placeholder)
+                        .into(posterImageView);
+               // Glide.with(getActivity()).load(moviePoster).into(posterImageView);
                 averageVoteTextView.setText(moviesList.get(id).getVoteAverage());
                 titleTextView.setSelected(true);
                 titleTextView.setText(moviesList.get(id).getTitle());
