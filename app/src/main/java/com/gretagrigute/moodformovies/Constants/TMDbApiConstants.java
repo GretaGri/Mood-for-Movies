@@ -7,8 +7,8 @@ public class TMDbApiConstants {
     public static final String RESULTS_ARRAY = "results";
     public static final String TITLE = "title";
     public static final String VOTE_AVERAGE = "vote_average";
-    public static final String RELEASE_DATE= "release_date";
-    public static final String PLOT_SYNOPSIS= "overview";
+    public static final String RELEASE_DATE = "release_date";
+    public static final String PLOT_SYNOPSIS = "overview";
     public static final String MOVIE_POSTER = "poster_path";
 
     public static final String QUERRY_PARAMETER_LANGUAGE = "language";

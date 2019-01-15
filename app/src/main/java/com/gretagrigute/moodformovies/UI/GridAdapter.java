@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,17 +72,16 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.RecyclerViewAd
 
         @Override
         public void onClick(View v) {
-            Integer id = getLayoutPosition();
+            int id = getLayoutPosition();
             ArrayList<MovieData> moviesList = (ArrayList<MovieData>) movieList;
             Fragment detailsFragment = new DetailsFragment();
             Bundle bundle = new Bundle();
             bundle.putParcelableArrayList(Constants.PARCELABLE, moviesList);
-            bundle.putInt(Constants.MOVIE_ID,id);
+            bundle.putInt(Constants.MOVIE_ID, id);
             detailsFragment.setArguments(bundle);
-            Log.d("GridAdapter","id is: "+ id);
             FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.fragment, detailsFragment);
+            fragmentTransaction.replace(R.id.fragment, detailsFragment).addToBackStack( "tag" );
             fragmentTransaction.commit();
         }
     }

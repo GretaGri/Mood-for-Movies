@@ -7,6 +7,17 @@ import android.os.Parcelable;
  * Created by Greta Grigutė on 2019-01-05.
  */
 public class MovieData implements Parcelable {
+    public static final Creator<MovieData> CREATOR = new Creator<MovieData>() {
+        @Override
+        public MovieData createFromParcel(Parcel in) {
+            return new MovieData(in);
+        }
+
+        @Override
+        public MovieData[] newArray(int size) {
+            return new MovieData[size];
+        }
+    };
     private final String releaseDate;
     private final String title;
     private final String voteAverage;
@@ -28,18 +39,6 @@ public class MovieData implements Parcelable {
         plotSynopsis = in.readString();
         moviePoster = in.readString();
     }
-
-    public static final Creator<MovieData> CREATOR = new Creator<MovieData>() {
-        @Override
-        public MovieData createFromParcel(Parcel in) {
-            return new MovieData(in);
-        }
-
-        @Override
-        public MovieData[] newArray(int size) {
-            return new MovieData[size];
-        }
-    };
 
     public String getReleaseDate() {
         return releaseDate;

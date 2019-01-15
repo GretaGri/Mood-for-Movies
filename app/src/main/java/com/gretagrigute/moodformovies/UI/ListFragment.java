@@ -3,8 +3,6 @@ package com.gretagrigute.moodformovies.UI;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -35,7 +33,7 @@ public class ListFragment extends Fragment {
 
         moviesList = getArguments().getParcelableArrayList(Constants.PARCELABLE);
 
-        }
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -46,7 +44,7 @@ public class ListFragment extends Fragment {
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
 
         int numberOfColumns = 2;
-        GridLayoutManager layoutManager = new GridLayoutManager (getActivity(), numberOfColumns);
+        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), numberOfColumns);
         recyclerView.setLayoutManager(layoutManager);
         ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(getActivity(), R.dimen.item_offset);
         recyclerView.addItemDecoration(itemDecoration);

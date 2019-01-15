@@ -4,79 +4,79 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
     android:fillViewport="true"
     android:fitsSystemWindows="true"
-    android:background="@color/colorPrimaryDark"
     tools:context=".MainActivity">
 
-<android.support.constraint.ConstraintLayout
-    android:id="@+id/news_list_item"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <ImageView
-        android:id="@+id/iv_image"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/news_list_item"
         android:layout_width="match_parent"
-        android:layout_height="360dp"
-        android:layout_margin="@dimen/margin_small"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:scaleType="centerCrop"
-        tools:src="@mipmap/ic_launcher" />
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ellipsize="marquee"
-        android:fadingEdge="horizontal"
-        android:marqueeRepeatLimit="marquee_forever"
-        android:scrollHorizontally="true"
-        android:layout_margin="@dimen/margin_medium"
-        android:singleLine="true"
-        android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/text_size_title"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_image"
-        tools:text="Pavadinimas" />
+        <ImageView
+            android:id="@+id/iv_image"
+            android:layout_width="match_parent"
+            android:layout_height="360dp"
+            android:layout_margin="@dimen/margin_small"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/placeholder" />
 
-    <TextView
-        android:id="@+id/tv_average_vote"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/padding_small"
-        android:textColor="@color/colorOnPrimaryDark"
-        android:background="@color/colorTransparent"
-        android:textSize="@dimen/text_size_title"
-        app:layout_constraintEnd_toEndOf="@id/iv_image"
-        app:layout_constraintTop_toTopOf="@id/iv_image"
-        tools:text="6.5" />
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_medium"
+            android:ellipsize="marquee"
+            android:fadingEdge="horizontal"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_size_title"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_image"
+            tools:text="Pavadinimas" />
 
-    <TextView
-        android:id="@+id/tv_date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_medium"
-        android:layout_marginEnd="@dimen/margin_medium"
-        android:textColor="@color/colorOnPrimaryDark"
-        android:textSize="@dimen/text_size_medium"
-        app:layout_constraintTop_toBottomOf="@id/tv_title"
-        tools:text="Data" />
+        <TextView
+            android:id="@+id/tv_average_vote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorTransparent"
+            android:padding="@dimen/padding_small"
+            android:textColor="@color/colorOnPrimaryDark"
+            android:textSize="@dimen/text_size_title"
+            app:layout_constraintEnd_toEndOf="@id/iv_image"
+            app:layout_constraintTop_toTopOf="@id/iv_image"
+            tools:text="6.5" />
 
-    <TextView
-        android:id="@+id/tv_plot"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_medium"
-        android:paddingBottom="@dimen/padding_medium"
-        android:textColor="@color/colorOnPrimaryDark"
-        android:textSize="@dimen/text_size_medium"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_date"
-        tools:text ="Description"/>
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginEnd="@dimen/margin_medium"
+            android:textColor="@color/colorOnPrimaryDark"
+            android:textSize="@dimen/text_size_medium"
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            tools:text="Data" />
 
-</android.support.constraint.ConstraintLayout>
+        <TextView
+            android:id="@+id/tv_plot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_medium"
+            android:paddingBottom="@dimen/padding_medium"
+            android:textColor="@color/colorOnPrimaryDark"
+            android:textSize="@dimen/text_size_medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_date"
+            tools:text="Description" />
+
+    </android.support.constraint.ConstraintLayout>
 </ScrollView>
