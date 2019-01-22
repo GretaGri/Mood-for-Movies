@@ -20,8 +20,8 @@ import java.util.ArrayList;
  */
 public class ListFragment extends Fragment {
 
-    RecyclerView recyclerView;
-    ArrayList<MovieData> moviesList;
+   private RecyclerView recyclerView;
+   private ArrayList<MovieData> moviesList;
 
     public ListFragment() {
         // Required empty public constructor
@@ -41,7 +41,7 @@ public class ListFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_main_list, container, false);
 
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
+        recyclerView = rootView.findViewById(R.id.recycler_view);
 
         int numberOfColumns = 2;
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), numberOfColumns);

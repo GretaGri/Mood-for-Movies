@@ -27,19 +27,19 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    String choice;
-    TextView noConnection;
-    ProgressBar loadingSpinner;
-    FrameLayout fragment;
+    private String choice;
+    private TextView noConnection;
+    private ProgressBar loadingSpinner;
+    private FrameLayout fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        noConnection = (TextView) findViewById(R.id.tv_no_connection);
-        loadingSpinner = (ProgressBar) findViewById(R.id.loading_spinner);
-        fragment = (FrameLayout) findViewById(R.id.fragment);
+        noConnection = findViewById(R.id.tv_no_connection);
+        loadingSpinner = findViewById(R.id.loading_spinner);
+        fragment = findViewById(R.id.fragment);
 
         choice = "first_page";
         new DownloadMoviesTask().execute();

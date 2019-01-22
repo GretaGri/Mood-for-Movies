@@ -20,13 +20,13 @@ import java.util.ArrayList;
  */
 public class DetailsFragment extends Fragment {
 
-    ArrayList<MovieData> moviesList;
-    Integer id;
-    ImageView posterImageView;
-    TextView titleTextView;
-    TextView dateTextView;
-    TextView averageVoteTextView;
-    TextView plotTextView;
+    private ArrayList<MovieData> moviesList;
+    private Integer id;
+    private ImageView posterImageView;
+    private TextView titleTextView;
+    private TextView dateTextView;
+    private TextView averageVoteTextView;
+    private TextView plotTextView;
 
     public DetailsFragment() {
         // Required empty public constructor
@@ -46,11 +46,11 @@ public class DetailsFragment extends Fragment {
 
         View itemView = inflater.inflate(R.layout.fragment_movies_details, container, false);
 
-        posterImageView = (ImageView) itemView.findViewById(R.id.iv_image);
-        titleTextView = (TextView) itemView.findViewById(R.id.tv_title);
-        dateTextView = (TextView) itemView.findViewById(R.id.tv_date);
-        averageVoteTextView = (TextView) itemView.findViewById(R.id.tv_average_vote);
-        plotTextView = (TextView) itemView.findViewById(R.id.tv_plot);
+        posterImageView = itemView.findViewById(R.id.iv_image);
+        titleTextView = itemView.findViewById(R.id.tv_title);
+        dateTextView = itemView.findViewById(R.id.tv_date);
+        averageVoteTextView = itemView.findViewById(R.id.tv_average_vote);
+        plotTextView = itemView.findViewById(R.id.tv_plot);
 
         if (moviesList != null && id != -1) {
             String moviePoster = moviesList.get(id).getMoviePoster();

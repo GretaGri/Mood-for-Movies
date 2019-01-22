@@ -50,7 +50,10 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.RecyclerViewAd
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewAdapterViewHolder recyclerViewAdapterViewHolder, int i) {
         String moviePoster = movieList.get(i).getMoviePoster();
-        Glide.with(context).load(moviePoster).into(recyclerViewAdapterViewHolder.posterImageView);
+        GlideApp.with(context)
+                .load(moviePoster)
+                .placeholder(R.drawable.placeholder)
+                .into(recyclerViewAdapterViewHolder.posterImageView);
     }
 
     @Override
@@ -65,9 +68,9 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.RecyclerViewAd
 
         public RecyclerViewAdapterViewHolder(@NonNull View itemView) {
             super(itemView);
-            posterImageView = (ImageView) itemView.findViewById(R.id.iv_image);
+            posterImageView = itemView.findViewById(R.id.iv_image);
             posterImageView.setOnClickListener(this);
-            frameLayout = (FrameLayout) itemView.findViewById(R.id.fragment_list);
+            frameLayout = itemView.findViewById(R.id.fragment_list);
         }
 
         @Override

@@ -148,19 +148,19 @@ public class NetworkUtils {
                 //Retrieve the field that you need from this json object:
 
                 // Extract the value for the key called "release_date"
-                String releaseDate = currentMovie.getString(TMDbApiConstants.RELEASE_DATE);
+                String releaseDate = currentMovie.optString(TMDbApiConstants.RELEASE_DATE);
 
                 // Extract the value for the key called "title"
-                String title = currentMovie.getString(TMDbApiConstants.TITLE);
+                String title = currentMovie.optString(TMDbApiConstants.TITLE);
 
                 // Extract the value for the "vote_average"
-                String voteAverage = currentMovie.getString(TMDbApiConstants.VOTE_AVERAGE);
+                String voteAverage = currentMovie.optString(TMDbApiConstants.VOTE_AVERAGE);
 
                 //Extract the value for the key "overview"
-                String plotSynopsis = currentMovie.getString(TMDbApiConstants.PLOT_SYNOPSIS);
+                String plotSynopsis = currentMovie.optString(TMDbApiConstants.PLOT_SYNOPSIS);
 
                 // Extract the value for the key called "poster_path"
-                String moviePosterPath = currentMovie.getString(TMDbApiConstants.MOVIE_POSTER);
+                String moviePosterPath = currentMovie.optString(TMDbApiConstants.MOVIE_POSTER);
 
                 String moviePoster = "";
 
