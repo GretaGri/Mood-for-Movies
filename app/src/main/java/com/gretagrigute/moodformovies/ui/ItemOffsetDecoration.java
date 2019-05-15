@@ -1,4 +1,4 @@
-package com.gretagrigute.moodformovies.UI;
+package com.gretagrigute.moodformovies.ui;
 
 import android.content.Context;
 import android.graphics.Rect;

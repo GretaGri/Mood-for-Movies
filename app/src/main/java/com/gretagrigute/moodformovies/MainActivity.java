@@ -15,11 +15,11 @@ import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.gretagrigute.moodformovies.Constants.Constants;
-import com.gretagrigute.moodformovies.Constants.TMDbApiConstants;
-import com.gretagrigute.moodformovies.Model.MovieData;
-import com.gretagrigute.moodformovies.Network.NetworkUtils;
-import com.gretagrigute.moodformovies.UI.ListFragment;
+import com.gretagrigute.moodformovies.constants.Constants;
+import com.gretagrigute.moodformovies.constants.TMDbApiConstants;
+import com.gretagrigute.moodformovies.model.MovieData;
+import com.gretagrigute.moodformovies.network.NetworkUtils;
+import com.gretagrigute.moodformovies.ui.ListFragment;
 
 import java.io.IOException;
 import java.net.URL;

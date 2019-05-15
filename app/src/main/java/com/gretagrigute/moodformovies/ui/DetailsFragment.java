@@ -1,4 +1,4 @@
-package com.gretagrigute.moodformovies.UI;
+package com.gretagrigute.moodformovies.ui;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.gretagrigute.moodformovies.Constants.Constants;
-import com.gretagrigute.moodformovies.Model.MovieData;
+import com.gretagrigute.moodformovies.constants.Constants;
+import com.gretagrigute.moodformovies.model.MovieData;
 import com.gretagrigute.moodformovies.R;
 
 import java.util.ArrayList;

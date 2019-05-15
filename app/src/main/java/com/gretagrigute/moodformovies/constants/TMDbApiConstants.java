@@ -1,4 +1,4 @@
-package com.gretagrigute.moodformovies.Constants;
+package com.gretagrigute.moodformovies.constants;
 
 /**
  * Created by Greta Grigutė on 2019-01-05.
@@ -10,6 +10,7 @@ public class TMDbApiConstants {
     public static final String RELEASE_DATE = "release_date";
     public static final String PLOT_SYNOPSIS = "overview";
     public static final String MOVIE_POSTER = "poster_path";
+    public static final String ID = "id";
 
     public static final String QUERRY_PARAMETER_LANGUAGE = "language";
     public static final String QUERRY_PARAMETER_SORT_BY = "sort_by";

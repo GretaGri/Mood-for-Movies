@@ -1,4 +1,4 @@
-package com.gretagrigute.moodformovies.Constants;
+package com.gretagrigute.moodformovies.constants;
 
 /**
  * Created by Greta Grigutė on 2019-01-13.

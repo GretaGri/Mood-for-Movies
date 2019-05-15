@@ -1,4 +1,4 @@
-package com.gretagrigute.moodformovies.Model;
+package com.gretagrigute.moodformovies.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -18,13 +18,15 @@ public class MovieData implements Parcelable {
             return new MovieData[size];
         }
     };
+    private final int id;
     private final String releaseDate;
     private final String title;
     private final String voteAverage;
     private final String plotSynopsis;
     private final String moviePoster;
 
-    public MovieData(String releaseDate, String title, String voteAverage, String plotSynopsis, String moviePoster) {
+    public MovieData(int id, String releaseDate, String title, String voteAverage, String plotSynopsis, String moviePoster) {
+        this.id = id;
         this.releaseDate = releaseDate;
         this.title = title;
         this.voteAverage = voteAverage;
@@ -33,12 +35,15 @@ public class MovieData implements Parcelable {
     }
 
     protected MovieData(Parcel in) {
+        id = in.readInt();
         releaseDate = in.readString();
         title = in.readString();
         voteAverage = in.readString();
         plotSynopsis = in.readString();
         moviePoster = in.readString();
     }
+
+    public int getMovieId(){return  id;}
 
     public String getReleaseDate() {
         return releaseDate;
@@ -63,6 +68,7 @@ public class MovieData implements Parcelable {
     @Override
     public String toString() {
         return "Movie{" +
+                "id" + id +
                 "release_date='" + releaseDate + '\'' +
                 ", title='" + title + '\'' +
                 ", vote_average='" + voteAverage + '\'' +
@@ -78,6 +84,7 @@ public class MovieData implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
         dest.writeString(releaseDate);
         dest.writeString(title);
         dest.writeString(voteAverage);

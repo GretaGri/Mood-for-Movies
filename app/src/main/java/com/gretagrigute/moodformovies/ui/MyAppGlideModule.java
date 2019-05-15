@@ -1,4 +1,4 @@
-package com.gretagrigute.moodformovies.UI;
+package com.gretagrigute.moodformovies.ui;
 
 import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.module.AppGlideModule;

@@ -1,12 +1,12 @@
-package com.gretagrigute.moodformovies.Network;
+package com.gretagrigute.moodformovies.network;
 
 import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
 
 import com.gretagrigute.moodformovies.BuildConfig;
-import com.gretagrigute.moodformovies.Constants.TMDbApiConstants;
-import com.gretagrigute.moodformovies.Model.MovieData;
+import com.gretagrigute.moodformovies.constants.TMDbApiConstants;
+import com.gretagrigute.moodformovies.model.MovieData;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -147,6 +147,9 @@ public class NetworkUtils {
 
                 //Retrieve the field that you need from this json object:
 
+                // Extract the value for the key called "id"
+                int movieId = currentMovie.optInt(TMDbApiConstants.ID);
+
                 // Extract the value for the key called "release_date"
                 String releaseDate = currentMovie.optString(TMDbApiConstants.RELEASE_DATE);
 
@@ -170,7 +173,7 @@ public class NetworkUtils {
                 }
 
                 // Create a new {@link MovieData} object with
-                MovieData movieData = new MovieData(releaseDate, title, voteAverage, plotSynopsis, moviePoster);
+                MovieData movieData = new MovieData(movieId, releaseDate, title, voteAverage, plotSynopsis, moviePoster);
 
                 // Add the new {@link movieData} to the list of movies.
                 movies.add(movieData);
