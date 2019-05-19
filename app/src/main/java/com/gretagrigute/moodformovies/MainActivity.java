@@ -1,7 +1,10 @@
 package com.gretagrigute.moodformovies;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.Observer;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -17,6 +20,9 @@ import android.widget.TextView;
 
 import com.gretagrigute.moodformovies.constants.Constants;
 import com.gretagrigute.moodformovies.constants.TMDbApiConstants;
+import com.gretagrigute.moodformovies.data.AppDataBase;
+import com.gretagrigute.moodformovies.data.MovieDao;
+import com.gretagrigute.moodformovies.data.MovieEntity;
 import com.gretagrigute.moodformovies.model.MovieData;
 import com.gretagrigute.moodformovies.network.NetworkUtils;
 import com.gretagrigute.moodformovies.ui.ListFragment;
@@ -24,6 +30,7 @@ import com.gretagrigute.moodformovies.ui.ListFragment;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView noConnection;
     private ProgressBar loadingSpinner;
     private FrameLayout fragment;
+    ArrayList <MovieData> moviesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +80,14 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
+        if (id == R.id.action_show_favorite) {
+            //Download favorite movies from Movie database
+            downloadMoviesFromDatabase();
+            // Update the cached copy of the words in the adapter.
+            getFragmentWithNewList(moviesList);
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -89,36 +105,55 @@ public class MainActivity extends AppCompatActivity {
             }
             return result;
         }
-
         protected void onProgressUpdate(Integer... progress) {
 
         }
 
         protected void onPostExecute(String result) {
             ArrayList<MovieData> moviesList = (ArrayList<MovieData>) NetworkUtils.extractFeatureFromJson(result);
-
-            if (moviesList != null) {
-                noConnection.setVisibility(View.GONE);
-                loadingSpinner.setVisibility(View.VISIBLE);
-                Fragment listFragment = new ListFragment();
-                Bundle bundle = new Bundle();
-                bundle.putParcelableArrayList(Constants.PARCELABLE, moviesList);
-                listFragment.setArguments(bundle);
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.add(R.id.fragment, listFragment);
-                fragmentTransaction.commit();
-                loadingSpinner.setVisibility(View.GONE);
-                fragment.setVisibility(View.VISIBLE);
-
-            } else {
-                Log.d("MainActivity", "no connection");
-                noConnection.setVisibility(View.VISIBLE);
-                loadingSpinner.setVisibility(View.GONE);
-                fragment.setVisibility(View.GONE);
-
-            }
+            getFragmentWithNewList(moviesList);
         }
+    }
+
+    private void getFragmentWithNewList(ArrayList <MovieData> moviesList) {
+        if (moviesList != null) {
+            noConnection.setVisibility(View.GONE);
+            loadingSpinner.setVisibility(View.VISIBLE);
+            Fragment listFragment = new ListFragment();
+            Bundle bundle = new Bundle();
+            bundle.putParcelableArrayList(Constants.PARCELABLE, moviesList);
+            listFragment.setArguments(bundle);
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.add(R.id.fragment, listFragment);
+            fragmentTransaction.commit();
+            loadingSpinner.setVisibility(View.GONE);
+            fragment.setVisibility(View.VISIBLE);
+
+        } else {
+            Log.d("MainActivity", "no connection");
+            noConnection.setVisibility(View.VISIBLE);
+            loadingSpinner.setVisibility(View.GONE);
+            fragment.setVisibility(View.GONE);
+
+        }
+    }
+
+    private void downloadMoviesFromDatabase(){
+        AppDataBase db = AppDataBase.getInstance(this);
+        final MovieDao movieDao = db.movieDao();
+        Log.d("TAG", "Actively retrieving the tasks from the DataBase");
+        final LiveData<List<MovieData>> movies = movieDao.loadAllMovies();
+        movies.observe(this, new Observer<List<MovieData>>() {
+                   @Override
+                   public void onChanged(@Nullable final List<MovieData> movies) {
+                       getMovieList((ArrayList) movies);
+                    }
+               });
+            }
+
+    private void getMovieList(ArrayList movies) {
+      moviesList = movies;
     }
 }
 

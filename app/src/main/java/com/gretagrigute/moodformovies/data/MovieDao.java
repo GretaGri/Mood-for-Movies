@@ -8,24 +8,26 @@ import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
+import com.gretagrigute.moodformovies.model.MovieData;
+
 import java.util.List;
 
 @Dao
 public interface MovieDao {
 
     @Query("SELECT*FROM movie_table")
-    LiveData <List<MovieEntity>> loadAllMovies();
+    LiveData <List<MovieData>> loadAllMovies();
 
-    @Insert
-    void insertMovie (MovieEntity movie);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertMovie (MovieData movie);
 
     @Update (onConflict = OnConflictStrategy.REPLACE)
-    void updateMovie (MovieEntity movie);
+    void updateMovie (MovieData movie);
 
     @Delete
-    void deleteMovie (MovieEntity movie);
+    void deleteMovie (MovieData movie);
 
     @Query("SELECT * FROM movie_table WHERE id = :id")
-    LiveData<MovieEntity> loadMovieById (int id);
+    LiveData<MovieData> loadMovieById (int id);
 
 }

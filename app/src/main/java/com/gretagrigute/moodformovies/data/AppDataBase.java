@@ -6,8 +6,11 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 import android.util.Log;
 
+import com.gretagrigute.moodformovies.AppExecutors;
+import com.gretagrigute.moodformovies.model.MovieData;
 
-    @Database(entities = {MovieEntity.class}, version = 1, exportSchema = false)
+
+@Database(entities = {MovieData.class}, version = 1, exportSchema = false)
     public abstract class AppDataBase extends RoomDatabase {
         private static final String LOG_TAG = AppDataBase.class.getSimpleName();
         private static final Object LOCK = new Object();
@@ -20,9 +23,6 @@ import android.util.Log;
                     Log.d(LOG_TAG,"Creating new Database instance");
                     sInstance = Room.databaseBuilder(context.getApplicationContext(),AppDataBase.class,
                             AppDataBase.DATABASE_NAME)
-                            //Temporary to check if DB works.
-                            // Queries should be done in a separate thread to avoid locking the UI
-                            // .allowMainThreadQueries()
                             .build();
                 }
             }

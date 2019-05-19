@@ -2,5 +2,7 @@
     <string name="app_name">Mood for Movies</string>
     <string name="menu_item_most_popular">Most Popular</string>
     <string name="menu_item_top_rated">Top Rated</string>
+    <string name="menu_item_favorite">Favorite</string>
     <string name="no_connection">No connection! \nPlease, check your internet connection.</string>
+
 </resources>

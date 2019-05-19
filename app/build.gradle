@@ -19,6 +19,7 @@ android {
             it.buildConfigField 'String', 'ApiKey', MoodForMovies_TMDbApiKey
         }
     }
+    android.defaultConfig.vectorDrawables.useSupportLibrary = true
 }
 
 dependencies {

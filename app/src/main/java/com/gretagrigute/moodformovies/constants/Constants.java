@@ -6,4 +6,8 @@ package com.gretagrigute.moodformovies.constants;
 public class Constants {
     public static final String PARCELABLE = "parcelable";
     public static final String MOVIE_ID = "id";
+    public static final int IS_FAVORITE_FALSE = 0;
+    public static final int IS_FAVORITE_TRUE =1;
+
+
 }
