@@ -12,12 +12,23 @@ public class TMDbApiConstants {
     public static final String MOVIE_POSTER = "poster_path";
     public static final String ID = "id";
 
+    public static final String VIDEO_NAME = "name";
+    public static final String VIDEO_KEY = "key";
+    public static final String VIDEO_TYPE = "type";
+
+    public static final String REVIEW_AUTHOR = "author";
+    public static final String REVIEW_CONTENT = "content";
+
+
     public static final String QUERRY_PARAMETER_LANGUAGE = "language";
     public static final String QUERRY_PARAMETER_SORT_BY = "sort_by";
     public static final String QUERRY_PARAMETER_PAGE = "page";
     public static final String QUERRY_PARAMETER_API_KEY = "api_key";
     public static final String TMDB_API_URL = "https://api.themoviedb.org/4/discover/movie?";
     public static final String TMDB_API_URL_POPULAR = "http://api.themoviedb.org/3/movie/popular?";
+    public static final String TMDB_API_URL_BASE = "http://api.themoviedb.org/3/movie";
+    public static final String VIDEOS = "videos";
+    public static final String REVIEWS = "reviews";
     public static final String POPULAR = "popular";
     public static final String TMDB_API_URL_TOP_RATED = "http://api.themoviedb.org/3/movie/top_rated?";
     public static final String TOP_RATED = "top_rated";

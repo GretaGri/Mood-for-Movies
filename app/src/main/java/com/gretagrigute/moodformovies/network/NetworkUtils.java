@@ -136,13 +136,13 @@ public class NetworkUtils {
             JSONObject baseJsonResponse = new JSONObject(moviesJSON);
 
             // Extract the JSONArray associated with the key called "results",
-            // which represents a list of articles.
+            // which represents a list of movies.
             JSONArray results = baseJsonResponse.getJSONArray(TMDbApiConstants.RESULTS_ARRAY);
 
-            // For each article in the articlesArray, create an {@link Article} object
+            // For each movie in the movies Array, create an {@link Movie} object
             for (int i = 0; i < results.length(); i++) {
 
-                // Get a single article at position i within the list of
+                // Get a single movie at position i within the list of
                 JSONObject currentMovie = results.getJSONObject(i);
 
                 //Retrieve the field that you need from this json object:

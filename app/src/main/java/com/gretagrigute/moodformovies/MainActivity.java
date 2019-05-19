@@ -22,7 +22,6 @@ import com.gretagrigute.moodformovies.constants.Constants;
 import com.gretagrigute.moodformovies.constants.TMDbApiConstants;
 import com.gretagrigute.moodformovies.data.AppDataBase;
 import com.gretagrigute.moodformovies.data.MovieDao;
-import com.gretagrigute.moodformovies.data.MovieEntity;
 import com.gretagrigute.moodformovies.model.MovieData;
 import com.gretagrigute.moodformovies.network.NetworkUtils;
 import com.gretagrigute.moodformovies.ui.ListFragment;
@@ -50,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
         fragment = findViewById(R.id.fragment);
 
         choice = "first_page";
-        new DownloadMoviesTask().execute();
+        if (savedInstanceState == null){
+        new DownloadMoviesTask().execute();}
     }
 
     @Override
