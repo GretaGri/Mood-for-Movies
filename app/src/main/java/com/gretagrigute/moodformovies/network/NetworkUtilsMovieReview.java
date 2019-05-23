@@ -124,7 +124,7 @@ public class NetworkUtilsMovieReview {
                 String content = currentMovie.optString(TMDbApiConstants.REVIEW_CONTENT);
 
                 // Create a new {@link MovieVideo} object with
-                MovieReview movieReview = new MovieReview(author,content);
+                MovieReview movieReview = new MovieReview(author, content);
 
                 // Add the new {@link movieVideo} to the list of videos.
                 movieReviews.add(movieReview);

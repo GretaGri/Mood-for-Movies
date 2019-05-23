@@ -68,7 +68,9 @@ public class MovieData implements Parcelable {
         isFavorite = in.readInt();
     }
 
-    public int getId(){return  id;}
+    public int getId() {
+        return id;
+    }
 
     public String getReleaseDate() {
         return releaseDate;
@@ -94,7 +96,7 @@ public class MovieData implements Parcelable {
         return isFavorite;
     }
 
-    public void setId(int id){
+    public void setId(int id) {
         this.id = id;
     }
 

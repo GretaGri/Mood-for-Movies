@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.gretagrigute.moodformovies.AppExecutors;
 import com.gretagrigute.moodformovies.R;
@@ -44,7 +45,6 @@ public class DetailsFragment extends Fragment {
     private TextView plotTextView;
     private RecyclerView rwMoviesVideos;
     private RecyclerView rwMoviesReview;
-    private ArrayList<MovieVideo> moviesVideoList;
 
     public DetailsFragment() {
         // Required empty public constructor
@@ -60,18 +60,11 @@ public class DetailsFragment extends Fragment {
 
         id = moviesList.get(position).getId();
         Log.d("TAG", "Id is:" + id);
-//        AppExecutors.getInstance().networkIO().execute(new Runnable() {
-//            @Override
-//            public void run() {
-//
-//            }
-//        });
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        setRetainInstance(true);
         View itemView = inflater.inflate(R.layout.fragment_movies_details, container, false);
 
         posterImageView = itemView.findViewById(R.id.iv_image);
@@ -176,6 +169,7 @@ public class DetailsFragment extends Fragment {
                         result = NetworkUtilsMovieReview.getResponseFromHttpUrl(movieUrl);
                     } catch (IOException e) {
                         e.printStackTrace();
+                        Toast.makeText(getContext(), "No movies list found", Toast.LENGTH_LONG).show();
                     }
                 }
                 final ArrayList<MovieReview> moviesReviewList = (ArrayList<MovieReview>) NetworkUtilsMovieReview.extractFeatureFromJson(result);

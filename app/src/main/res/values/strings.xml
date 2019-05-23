@@ -7,5 +7,9 @@
     <string name="open">Open</string>
     <string name="label_reviews">Reviews</string>
     <string name="label_trailers">Trailers</string>
+    <string name="favorite_label">Favorite movies</string>
+    <string name="top_rated_label">Top rated movies</string>
+    <string name="popular_label">Popular movies</string>
+    <string name="no_movies_in_list">No movies in the list</string>
 
 </resources>

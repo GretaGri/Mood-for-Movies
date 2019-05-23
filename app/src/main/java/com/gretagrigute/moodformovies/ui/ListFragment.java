@@ -20,8 +20,8 @@ import java.util.ArrayList;
  */
 public class ListFragment extends Fragment {
 
-   private RecyclerView recyclerView;
-   private ArrayList<MovieData> moviesList;
+    private RecyclerView recyclerView;
+    private ArrayList<MovieData> moviesList;
 
     public ListFragment() {
         // Required empty public constructor
@@ -40,7 +40,6 @@ public class ListFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_main_list, container, false);
-        setRetainInstance(true);
         recyclerView = rootView.findViewById(R.id.recycler_view);
 
         int numberOfColumns = 2;
@@ -55,5 +54,4 @@ public class ListFragment extends Fragment {
         }
         return rootView;
     }
-
 }

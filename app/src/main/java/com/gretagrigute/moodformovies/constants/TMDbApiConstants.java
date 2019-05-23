@@ -19,7 +19,6 @@ public class TMDbApiConstants {
     public static final String REVIEW_AUTHOR = "author";
     public static final String REVIEW_CONTENT = "content";
 
-
     public static final String QUERRY_PARAMETER_LANGUAGE = "language";
     public static final String QUERRY_PARAMETER_SORT_BY = "sort_by";
     public static final String QUERRY_PARAMETER_PAGE = "page";
@@ -27,11 +26,15 @@ public class TMDbApiConstants {
     public static final String TMDB_API_URL = "https://api.themoviedb.org/4/discover/movie?";
     public static final String TMDB_API_URL_POPULAR = "http://api.themoviedb.org/3/movie/popular?";
     public static final String TMDB_API_URL_BASE = "http://api.themoviedb.org/3/movie";
+    public static final String TMDB_API_URL_TOP_RATED = "http://api.themoviedb.org/3/movie/top_rated?";
+    public static final String IMAGE_URL_BASE_w92 = "https://image.tmdb.org/t/p/w500";
     public static final String VIDEOS = "videos";
     public static final String REVIEWS = "reviews";
-    public static final String POPULAR = "popular";
-    public static final String TMDB_API_URL_TOP_RATED = "http://api.themoviedb.org/3/movie/top_rated?";
-    public static final String TOP_RATED = "top_rated";
-    public static final String IMAGE_URL_BASE_w92 = "https://image.tmdb.org/t/p/w500";
 
+    //For saving users choice/sorting category
+    public static final String POPULAR = "popular";
+    public static final String FAVORITE = "favorite";
+    public static final String TOP_RATED = "top_rated";
+    public static final String CHOICE = "choice";
+    public static final String MOVIE_LIST = "movie_list";
 }

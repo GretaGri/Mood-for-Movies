@@ -40,9 +40,9 @@ public class MovieReviewAdapter extends RecyclerView.Adapter<MovieReviewAdapter.
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewAdapterViewHolder recyclerViewAdapterViewHolder, int i) {
         recyclerViewAdapterViewHolder.author.setText(movieReviewList.get(i).getAuthor());
-        Log.d ("LOG_MovieTrailerAdapter","review author is: " + movieReviewList.get(i).getAuthor());
+        Log.d("LOG_MovieTrailerAdapter", "review author is: " + movieReviewList.get(i).getAuthor());
         recyclerViewAdapterViewHolder.content.setText(movieReviewList.get(i).getContent());
-        Log.d ("LOG_MovieTrailerAdapter","review content is: " + movieReviewList.get(i).getContent());
+        Log.d("LOG_MovieTrailerAdapter", "review content is: " + movieReviewList.get(i).getContent());
     }
 
     @Override

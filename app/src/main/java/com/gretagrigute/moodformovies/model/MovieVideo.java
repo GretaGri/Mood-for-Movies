@@ -1,7 +1,7 @@
 package com.gretagrigute.moodformovies.model;
 
 public class MovieVideo {
-   private String name;
+    private String name;
     private String key;
     private String type;
 

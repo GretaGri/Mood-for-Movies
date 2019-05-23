@@ -16,18 +16,18 @@ import java.util.List;
 public interface MovieDao {
 
     @Query("SELECT*FROM movie_table")
-    LiveData <List<MovieData>> loadAllMovies();
+    LiveData<List<MovieData>> loadAllMovies();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertMovie (MovieData movie);
+    void insertMovie(MovieData movie);
 
-    @Update (onConflict = OnConflictStrategy.REPLACE)
-    void updateMovie (MovieData movie);
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    void updateMovie(MovieData movie);
 
     @Delete
-    void deleteMovie (MovieData movie);
+    void deleteMovie(MovieData movie);
 
     @Query("SELECT * FROM movie_table WHERE id = :id")
-    LiveData<MovieData> loadMovieById (int id);
+    LiveData<MovieData> loadMovieById(int id);
 
 }

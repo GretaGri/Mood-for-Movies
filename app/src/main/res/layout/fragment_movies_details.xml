@@ -28,10 +28,10 @@
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/padding_medium"
             android:ellipsize="marquee"
             android:fadingEdge="horizontal"
             android:marqueeRepeatLimit="marquee_forever"
+            android:padding="@dimen/padding_medium"
             android:scrollHorizontally="true"
             android:singleLine="true"
             android:textColor="@color/colorPrimary"
@@ -65,10 +65,12 @@
             android:id="@+id/tv_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_medium"
-            android:layout_marginEnd="@dimen/margin_medium"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:textColor="@color/colorOnPrimaryDark"
             android:textSize="@dimen/text_size_medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_title"
             tools:text="Data" />
 
@@ -77,10 +79,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_medium"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:paddingBottom="@dimen/padding_medium"
             android:textColor="@color/colorOnPrimaryDark"
             android:textSize="@dimen/text_size_medium"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_date"
             tools:text="Description" />
 
@@ -133,8 +138,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:text="@string/label_trailers"
             android:gravity="center"
+            android:text="@string/label_trailers"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/text_size_title"
             app:layout_constraintBottom_toTopOf="@+id/trailer_list"
@@ -149,13 +154,13 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:text="@string/label_reviews"
             android:gravity="center"
+            android:text="@string/label_reviews"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/text_size_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/trailer_list"/>
+            app:layout_constraintTop_toBottomOf="@+id/trailer_list" />
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

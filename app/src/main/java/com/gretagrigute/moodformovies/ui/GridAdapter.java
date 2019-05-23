@@ -83,7 +83,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.RecyclerViewAd
             detailsFragment.setArguments(bundle);
             FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.fragment, detailsFragment).addToBackStack( "tag" );
+            fragmentTransaction.replace(R.id.fragment, detailsFragment).addToBackStack("tag");
             fragmentTransaction.commit();
         }
     }
