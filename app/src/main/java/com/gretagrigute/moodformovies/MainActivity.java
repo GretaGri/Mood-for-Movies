@@ -25,7 +25,6 @@ import com.gretagrigute.moodformovies.data.AppDataBase;
 import com.gretagrigute.moodformovies.data.MovieDao;
 import com.gretagrigute.moodformovies.model.MovieData;
 import com.gretagrigute.moodformovies.network.NetworkUtils;
-import com.gretagrigute.moodformovies.ui.DetailsFragment;
 import com.gretagrigute.moodformovies.ui.ListFragment;
 
 import java.io.IOException;
@@ -58,13 +57,13 @@ public class MainActivity extends AppCompatActivity  {
             choice = savedInstanceState.getString(TMDbApiConstants.CHOICE);
             moviesList = savedInstanceState.getParcelableArrayList(TMDbApiConstants.MOVIE_LIST);
 
-            if (choice == TMDbApiConstants.POPULAR) {
+            if (choice.equals(TMDbApiConstants.POPULAR)) {
                 new DownloadMoviesTask().execute();
                 setTitle(getResources().getString(R.string.popular_label));
-            } else if (choice == TMDbApiConstants.TOP_RATED) {
+            } else if (choice.equals(TMDbApiConstants.TOP_RATED)){
                 new DownloadMoviesTask().execute();
                 setTitle(getResources().getString(R.string.top_rated_label));
-            } else if (choice == TMDbApiConstants.FAVORITE) {
+            } else if (choice.equals(TMDbApiConstants.FAVORITE)) {
                 setTitle(getResources().getString(R.string.favorite_label));
                 //Download favorite movies from Movie database
                 downloadMoviesFromDatabase();
@@ -171,7 +170,7 @@ public class MainActivity extends AppCompatActivity  {
 
     private void downloadMoviesFromDatabase() {
         AppDataBase db = AppDataBase.getInstance(this);
-      //  if(db != null) {
+        if(db != null) {
             final MovieDao movieDao = db.movieDao();
             Log.d("TAG", "Actively retrieving the tasks from the DataBase");
             final LiveData<List<MovieData>> movies = movieDao.loadAllMovies();
@@ -182,7 +181,7 @@ public class MainActivity extends AppCompatActivity  {
                 }
             });
         }
- //   }
+   }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
