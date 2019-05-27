@@ -35,6 +35,8 @@ public class TMDbApiConstants {
     public static final String POPULAR = "popular";
     public static final String FAVORITE = "favorite";
     public static final String TOP_RATED = "top_rated";
+    public static final String DETAIL_PAGE = "detail_page";
+    public static final String ID_FOR_DETAILS = "id_for_details";
     public static final String CHOICE = "choice";
     public static final String MOVIE_LIST = "movie_list";
 }

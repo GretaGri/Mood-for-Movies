@@ -25,6 +25,7 @@ import com.gretagrigute.moodformovies.data.AppDataBase;
 import com.gretagrigute.moodformovies.data.MovieDao;
 import com.gretagrigute.moodformovies.model.MovieData;
 import com.gretagrigute.moodformovies.network.NetworkUtils;
+import com.gretagrigute.moodformovies.ui.DetailsFragment;
 import com.gretagrigute.moodformovies.ui.ListFragment;
 
 import java.io.IOException;
@@ -32,7 +33,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
 
     private String choice;
     private TextView noConnection;
@@ -69,9 +70,7 @@ public class MainActivity extends AppCompatActivity {
                 downloadMoviesFromDatabase();
                 // Update the cached copy of the words in the adapter.
                 getFragmentWithNewList(moviesList);
-            }
-        }
-    }
+            }}}
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -172,16 +171,18 @@ public class MainActivity extends AppCompatActivity {
 
     private void downloadMoviesFromDatabase() {
         AppDataBase db = AppDataBase.getInstance(this);
-        final MovieDao movieDao = db.movieDao();
-        Log.d("TAG", "Actively retrieving the tasks from the DataBase");
-        final LiveData<List<MovieData>> movies = movieDao.loadAllMovies();
-        movies.observe(this, new Observer<List<MovieData>>() {
-            @Override
-            public void onChanged(@Nullable final List<MovieData> movies) {
-                getMovieList((ArrayList) movies);
-            }
-        });
-    }
+      //  if(db != null) {
+            final MovieDao movieDao = db.movieDao();
+            Log.d("TAG", "Actively retrieving the tasks from the DataBase");
+            final LiveData<List<MovieData>> movies = movieDao.loadAllMovies();
+            movies.observe(this, new Observer<List<MovieData>>() {
+                @Override
+                public void onChanged(@Nullable final List<MovieData> movies) {
+                    getMovieList((ArrayList) movies);
+                }
+            });
+        }
+ //   }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {

@@ -74,6 +74,17 @@ public class DetailsFragment extends Fragment {
         plotTextView = itemView.findViewById(R.id.tv_plot);
         rwMoviesReview = itemView.findViewById(R.id.reviews_list);
         rwMoviesVideos = itemView.findViewById(R.id.trailer_list);
+        getActivity().setTitle(R.string.movie_details_label);
+
+        LinearLayoutManager layoutManagerVideos = new LinearLayoutManager(getContext());
+        MovieTrailerAdapter movieTrailerAdapter = new MovieTrailerAdapter(null);
+        rwMoviesVideos.setAdapter(movieTrailerAdapter);
+        rwMoviesVideos.setLayoutManager(layoutManagerVideos);
+
+        LinearLayoutManager layoutManagerReview = new LinearLayoutManager(getContext());
+        MovieReviewAdapter movieReviewAdapter = new MovieReviewAdapter(null);
+        rwMoviesReview.setAdapter(movieReviewAdapter);
+        rwMoviesReview.setLayoutManager(layoutManagerReview);
 
         final ImageButton button = itemView.findViewById(R.id.imageButton);
 
@@ -129,7 +140,6 @@ public class DetailsFragment extends Fragment {
             }
         }
 
-
         AppExecutors.getInstance().networkIO().execute(new Runnable() {
             @Override
             public void run() {
@@ -149,9 +159,9 @@ public class DetailsFragment extends Fragment {
                         @Override
                         public void run() {
                             LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-                            rwMoviesVideos.setLayoutManager(layoutManager);
                             MovieTrailerAdapter adapter = new MovieTrailerAdapter(moviesVideoList);
                             rwMoviesVideos.setAdapter(adapter);
+                            rwMoviesVideos.setLayoutManager(layoutManager);
                         }
                     });
                 }

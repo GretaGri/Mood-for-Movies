@@ -15,6 +15,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.gretagrigute.moodformovies.constants.Constants;
+import com.gretagrigute.moodformovies.constants.TMDbApiConstants;
 import com.gretagrigute.moodformovies.model.MovieData;
 import com.gretagrigute.moodformovies.R;
 
@@ -27,6 +28,8 @@ import java.util.List;
 public class GridAdapter extends RecyclerView.Adapter<GridAdapter.RecyclerViewAdapterViewHolder> {
     private List<MovieData> movieList;
     private Context context;
+    String choice;
+    int id;
 
     //Empty constructor
     public GridAdapter(ArrayList<MovieData> movieList) {
@@ -74,7 +77,8 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.RecyclerViewAd
 
         @Override
         public void onClick(View v) {
-            int id = getLayoutPosition();
+            choice = TMDbApiConstants.DETAIL_PAGE;
+            id = getLayoutPosition();
             ArrayList<MovieData> moviesList = (ArrayList<MovieData>) movieList;
             Fragment detailsFragment = new DetailsFragment();
             Bundle bundle = new Bundle();
@@ -85,6 +89,12 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.RecyclerViewAd
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.fragment, detailsFragment).addToBackStack("tag");
             fragmentTransaction.commit();
+        }
+        public String getChoice(){
+            return choice;
+        }
+        public int getId(){
+            return id;
         }
     }
 }

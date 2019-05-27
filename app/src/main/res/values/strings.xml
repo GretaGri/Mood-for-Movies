@@ -10,6 +10,6 @@
     <string name="favorite_label">Favorite movies</string>
     <string name="top_rated_label">Top rated movies</string>
     <string name="popular_label">Popular movies</string>
+    <string name="movie_details_label">Movie details</string>
     <string name="no_movies_in_list">No movies in the list</string>
-
 </resources>
