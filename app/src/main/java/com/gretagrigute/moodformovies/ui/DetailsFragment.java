@@ -56,7 +56,7 @@ public class DetailsFragment extends Fragment {
 
         moviesList = getArguments().getParcelableArrayList(Constants.PARCELABLE);
         position = getArguments().getInt(Constants.MOVIE_ID);
-        movie = moviesList.get(position);
+        movie = getArguments().getParcelable(Constants.MOVIE);
 
         id = moviesList.get(position).getId();
         Log.d("TAG", "Id is:" + id);

@@ -25,6 +25,7 @@ import com.gretagrigute.moodformovies.data.AppDataBase;
 import com.gretagrigute.moodformovies.data.MovieDao;
 import com.gretagrigute.moodformovies.model.MovieData;
 import com.gretagrigute.moodformovies.network.NetworkUtils;
+import com.gretagrigute.moodformovies.ui.DetailsFragment;
 import com.gretagrigute.moodformovies.ui.ListFragment;
 
 import java.io.IOException;
@@ -32,13 +33,14 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity implements ListFragment.OnMovieClickListener {
 
     private String choice;
     private TextView noConnection;
     private ProgressBar loadingSpinner;
     private FrameLayout fragment;
     ArrayList<MovieData> moviesList;
+    private int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +71,17 @@ public class MainActivity extends AppCompatActivity  {
                 downloadMoviesFromDatabase();
                 // Update the cached copy of the words in the adapter.
                 getFragmentWithNewList(moviesList);
+            }
+        else if (choice.equals(TMDbApiConstants.DETAIL_PAGE)){
+                Fragment detailsFragment = new DetailsFragment();
+                Bundle bundle = new Bundle();
+                bundle.putParcelableArrayList(Constants.PARCELABLE, moviesList);
+                bundle.putInt(Constants.MOVIE_ID, id);
+                detailsFragment.setArguments(bundle);
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, detailsFragment).addToBackStack("tag");
+                fragmentTransaction.commit();
             }}}
 
     @Override
@@ -114,6 +127,15 @@ public class MainActivity extends AppCompatActivity  {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onMovieSelected(int position, ArrayList<MovieData> moviesList) {
+        choice = TMDbApiConstants.DETAIL_PAGE;
+        this.moviesList = moviesList;
+        id = moviesList.get(position).getId();
+        Log.d ("TAG_MainActivity", "id is set in main activity and is: " + id);
+        Log.d ("TAG_MainActivity", "moviesList is set in main activity and is: " + moviesList.toString());
     }
 
     public class DownloadMoviesTask extends AsyncTask<URL, Integer, String> {
