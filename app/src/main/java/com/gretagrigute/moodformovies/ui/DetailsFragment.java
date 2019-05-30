@@ -54,12 +54,13 @@ public class DetailsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        moviesList = getArguments().getParcelableArrayList(Constants.PARCELABLE);
-        position = getArguments().getInt(Constants.MOVIE_ID);
+//        moviesList = getArguments().getParcelableArrayList(Constants.PARCELABLE);
+        id = getArguments().getInt(Constants.MOVIE_ID);
         movie = getArguments().getParcelable(Constants.MOVIE);
 
-        id = moviesList.get(position).getId();
-        Log.d("TAG", "Id is:" + id);
+        if(movie != null){
+        id = movie.getId();
+        Log.d("TAG_DetailsFragment", "Id is:" + id);}
     }
 
     @Override
@@ -122,7 +123,8 @@ public class DetailsFragment extends Fragment {
             }
         });
 
-        if (moviesList != null && position != -1) {
+       // if (moviesList != null && position != -1) {
+        if(movie!=null){
             String moviePoster = movie.getMoviePoster();
             GlideApp.with(getActivity())
                     .load(moviePoster)

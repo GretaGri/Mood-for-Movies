@@ -39,7 +39,8 @@ public class MainActivity extends AppCompatActivity implements ListFragment.OnMo
     private TextView noConnection;
     private ProgressBar loadingSpinner;
     private FrameLayout fragment;
-    ArrayList<MovieData> moviesList;
+    private ArrayList<MovieData> moviesList;
+    private MovieData movie;
     private int id;
 
     @Override
@@ -58,6 +59,8 @@ public class MainActivity extends AppCompatActivity implements ListFragment.OnMo
         } else {
             choice = savedInstanceState.getString(TMDbApiConstants.CHOICE);
             moviesList = savedInstanceState.getParcelableArrayList(TMDbApiConstants.MOVIE_LIST);
+            movie = savedInstanceState.getParcelable(Constants.MOVIE);
+            id = savedInstanceState.getInt(Constants.MOVIE_ID);
 
             if (choice.equals(TMDbApiConstants.POPULAR)) {
                 new DownloadMoviesTask().execute();
@@ -75,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements ListFragment.OnMo
         else if (choice.equals(TMDbApiConstants.DETAIL_PAGE)){
                 Fragment detailsFragment = new DetailsFragment();
                 Bundle bundle = new Bundle();
-                bundle.putParcelableArrayList(Constants.PARCELABLE, moviesList);
+                bundle.putParcelable(Constants.MOVIE, movie);
                 bundle.putInt(Constants.MOVIE_ID, id);
                 detailsFragment.setArguments(bundle);
                 FragmentManager fragmentManager = getSupportFragmentManager();
@@ -130,12 +133,12 @@ public class MainActivity extends AppCompatActivity implements ListFragment.OnMo
     }
 
     @Override
-    public void onMovieSelected(int position, ArrayList<MovieData> moviesList) {
+    public void onMovieSelected(int position, MovieData movie) {
         choice = TMDbApiConstants.DETAIL_PAGE;
-        this.moviesList = moviesList;
+        this.movie = movie;
         id = moviesList.get(position).getId();
         Log.d ("TAG_MainActivity", "id is set in main activity and is: " + id);
-        Log.d ("TAG_MainActivity", "moviesList is set in main activity and is: " + moviesList.toString());
+        Log.d ("TAG_MainActivity", "moviesList is set in main activity and is: " + movie.toString());
     }
 
     public class DownloadMoviesTask extends AsyncTask<URL, Integer, String> {
@@ -210,6 +213,8 @@ public class MainActivity extends AppCompatActivity implements ListFragment.OnMo
         super.onSaveInstanceState(outState);
         outState.putString(TMDbApiConstants.CHOICE, choice);
         outState.putParcelableArrayList(TMDbApiConstants.MOVIE_LIST, moviesList);
+        outState.putParcelable(Constants.MOVIE, movie);
+        outState.putInt(Constants.MOVIE_ID, id);
     }
 
     private void getMovieList(ArrayList movies) {

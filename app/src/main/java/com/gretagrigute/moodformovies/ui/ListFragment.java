@@ -25,6 +25,7 @@ public class ListFragment extends Fragment implements GridAdapter.OnItemClickLis
 
     private RecyclerView recyclerView;
     private ArrayList<MovieData> moviesList;
+    private MovieData movie;
     // Define a new interface OnMovieClickListener that triggers a callback in the host activity
     OnMovieClickListener callback;
 
@@ -38,18 +39,20 @@ public class ListFragment extends Fragment implements GridAdapter.OnItemClickLis
 
         moviesList = getArguments().getParcelableArrayList(Constants.PARCELABLE);
 
+
     }
 
     @Override
     public void onItemClick(int position) {
+        movie = moviesList.get(position);
         // Trigger the callback method and pass in the position that was clicked
-        callback.onMovieSelected(position, moviesList);
+        callback.onMovieSelected(position, movie);
         Log.d("ListFragment", "movie selected id is:" + position);
     }
 
     // OnMovieClickListener interface, calls a method in the host activity named onMovieSelected
     public interface OnMovieClickListener {
-        void onMovieSelected(int position, ArrayList <MovieData> moviesList);
+        void onMovieSelected(int position, MovieData movie);
     }
 
     // Override onAttach to make sure that the container activity has implemented the callback

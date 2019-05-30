@@ -84,9 +84,10 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.RecyclerViewAd
                     choice = TMDbApiConstants.DETAIL_PAGE;
                     id = getLayoutPosition();
                     ArrayList<MovieData> moviesList = (ArrayList<MovieData>) movieList;
+                    MovieData movie = moviesList.get(id);
                     Fragment detailsFragment = new DetailsFragment();
                     Bundle bundle = new Bundle();
-                    bundle.putParcelableArrayList(Constants.PARCELABLE, moviesList);
+                    bundle.putParcelable(Constants.MOVIE, movie);
                     bundle.putInt(Constants.MOVIE_ID, id);
                     detailsFragment.setArguments(bundle);
                     FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
