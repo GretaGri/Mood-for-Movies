@@ -123,8 +123,7 @@ public class MainActivity extends AppCompatActivity implements ListFragment.OnMo
                             getApplicationContext().getString(R.string.no_movies_in_list),
                             Toast.LENGTH_LONG).show();
                 }
-                // Update the cached copy of the words in the adapter.
-                getFragmentWithNewList(moviesList);
+
                 return true;
 
             default:
@@ -205,6 +204,8 @@ public class MainActivity extends AppCompatActivity implements ListFragment.OnMo
                     getMovieList((ArrayList) movies);
                 }
             });
+            // Update the cached copy of the words in the adapter.
+            getFragmentWithNewList(moviesList);
         }
    }
 
