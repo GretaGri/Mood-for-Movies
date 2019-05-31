@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements ListFragment.OnMo
     public void onMovieSelected(int position, MovieData movie) {
         choice = TMDbApiConstants.DETAIL_PAGE;
         this.movie = movie;
-        id = moviesList.get(position).getId();
+        id = movie.getId();
         Log.d ("TAG_MainActivity", "id is set in main activity and is: " + id);
         Log.d ("TAG_MainActivity", "moviesList is set in main activity and is: " + movie.toString());
     }
